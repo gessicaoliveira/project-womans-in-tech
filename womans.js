@@ -77,5 +77,5 @@ function showPort() {
 
 app.use(router.get('/womans', showWomans)); // confg rota GET /womans
 app.use(router.post('/womans', createWoman)); //config rota POST /womans
-app.use(router.patch('/woman/:id', correctWoman)); //config PATCH /womans
+app.use(router.patch('/womans/:id', correctWoman)); //config PATCH /womans
 app.listen(port, showPort); // servidor ouvindo porta
