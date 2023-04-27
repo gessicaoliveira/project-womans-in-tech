@@ -70,6 +70,17 @@ function correctWoman(request, response) {
 
 }
 
+//DELETE
+function deleteWoman(request, response) {
+    function allButHer(woman) {
+        if (woman.id !== request.params.id) {
+            return woman;
+        }
+    }
+    const womenWhoStayed = womans.filter(allButHer);
+    response.json(womenWhoStayed);
+}
+
 //PORT
 function showPort() {
     console.log(`Servidor criado e rodando na porta ${port}`);
@@ -77,5 +88,6 @@ function showPort() {
 
 app.use(router.get('/womans', showWomans)); // confg rota GET /womans
 app.use(router.post('/womans', createWoman)); //config rota POST /womans
-app.use(router.patch('/womans/:id', correctWoman)); //config PATCH /womans
+app.use(router.patch('/womans/:id', correctWoman)); //config rota PATCH /womans/:id
+app.use(router.delete('/womans/:id', deleteWoman)); // config rota DELETE /womans/:id
 app.listen(port, showPort); // servidor ouvindo porta
