@@ -1,6 +1,10 @@
 const express = require('express'); //iniciando express
 const router = express.Router(); //config 1° parte rota
-const { v4:uuidv4 } = require('uuid');
+const { v4:uuidv4 } = require('uuid'); //biblioteca que gera id automaticamente
+const connectDatabase = require('./database');
+
+const connDatabase = require('./database'); //ligando ao arquivo banco de dados
+connectDatabase(); //chamando função que conecta o banco
 
 const app = express(); //iniciando app
 app.use(express.json()); //dados trafegando requisição format json
@@ -13,18 +17,21 @@ const womans = [
         name: 'Gessica Oliveira',
         image: 'https://gerenciador.popload.com.br/wp-content/uploads/2018/01/180118_brodydalle2.jpg',
         tinybio: 'Developer full stack jr',
+        quote: 'Nada resiste ao trabalho.'
     },
     {
         id: '2',
-        name: 'Conceição Evaristo',
-        image: 'https://i.postimg.cc/Z9XzNNMS/conceicao-evaristo.png',
-        tinybio: 'Writer',
+        name: 'Simara Conceição',
+        image: 'https://github.com/simaraconceicao.png',
+        tinybio: 'Developer and Instructor',
+        quote: ''
     },
     {
         id: '3',
         name: 'Nina da Hora',
         image: 'https://bit.ly/3FKpFaz',
-        tinybio: 'Antiracist hacker',
+        tinybio: 'Antiracist Hacker',
+        quote: ''
     },
 ];
 
