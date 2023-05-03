@@ -1,6 +1,9 @@
 const express = require('express'); //iniciando express
 const router = express.Router(); //config 1° parte rota
 
+//Pack cors permite consumir esta api no front
+const cors = require('cors');
+
 const connectDatabase = require('./database');
 
 const connDatabase = require('./database'); //ligando ao arquivo banco de dados
@@ -8,7 +11,10 @@ connectDatabase(); //chamando função que conecta o banco
 
 const Woman = require('./model'); //model criada
 const app = express(); //iniciando app
+
 app.use(express.json()); //dados trafegando requisição format json
+app.use(cors());
+
 const port = 3333; //criando a porta
 
 //lista incial de mulheres
