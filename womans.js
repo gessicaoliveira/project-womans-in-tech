@@ -6,7 +6,7 @@ const connectDatabase = require('./database');
 const connDatabase = require('./database'); //ligando ao arquivo banco de dados
 connectDatabase(); //chamando função que conecta o banco
 
-const Woman = require('.model'); //model criada
+const Woman = require('./model'); //model criada
 const app = express(); //iniciando app
 app.use(express.json()); //dados trafegando requisição format json
 const port = 3333; //criando a porta
@@ -25,14 +25,14 @@ const port = 3333; //criando a porta
 //         name: 'Simara Conceição',
 //         image: 'https://github.com/simaraconceicao.png',
 //         tinybio: 'Developer and Instructor',
-//         quote: ''
+//         quote: 'Quero ser <dev> mulheres plurais codando um futuro tecnológico com mais equidade.'
 //     },
 //     {
 //         id: '3',
 //         name: 'Nina da Hora',
-//         image: 'https://bit.ly/3FKpFaz',
+//         image: 'https://s2.glbimg.com/XFyjolmgcp0KTCQBJQfJXKCQxUs=/0x0:620x807/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_71a8fe14ac6d40bd993eb59f7203fe6f/internal_photos/bs/2022/c/p/vuevdESXKe7xZSBA927w/2020-11-15-nina-da-hora.jpeg',
 //         tinybio: 'Antiracist Hacker',
-//         quote: ''
+//         quote: 'I'm learning to think critically about AI and how to create decolonial technologies.'
 //     },
 // ];
 
@@ -94,14 +94,15 @@ async function correctWoman(request, response) {
 }
 
 //DELETE
-function deleteWoman(request, response) {
-    function allButHer(woman) {
-        if (woman.id !== request.params.id) {
-            return woman;
-        }
-    }
-    const womenWhoStayed = womans.filter(allButHer);
-    response.json(womenWhoStayed);
+async function deleteWoman(request, response) {
+    try {
+        await Woman.findByIdAndDelete(request.params.id);
+        response.json({ mensagem:'Mulher deletada com sucesso!' });
+
+    } catch(erro) {
+        console.log(erro);
+    }    
+    
 }
 
 //PORT
